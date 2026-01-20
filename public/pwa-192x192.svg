@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 192" width="192" height="192">
+  <rect width="192" height="192" rx="24" fill="#3b82f6"/>
+  <g fill="white">
+    <!-- Layer 1 (bottom) -->
+    <rect x="36" y="120" width="120" height="24" rx="4"/>
+    <!-- Layer 2 (middle) -->
+    <rect x="48" y="84" width="96" height="24" rx="4"/>
+    <!-- Layer 3 (top) -->
+    <rect x="60" y="48" width="72" height="24" rx="4"/>
+  </g>
+</svg>
