@@ -1,5 +1,14 @@
 import type { Activity, WeatherData, Recommendation, ClothingItem } from './types';
 
+// Temperature and weather calculation constants
+const WIND_CHILL_THRESHOLD_KMH = 10;
+const WIND_CHILL_FACTOR = 0.4;
+const HIGH_HUMIDITY_THRESHOLD = 70;
+const WARM_TEMP_THRESHOLD = 20;
+const HUMIDITY_HEAT_ADJUSTMENT = -2;
+const HUMIDITY_COLD_ADJUSTMENT = 1;
+const HIGH_INTENSITY_TEMP_ADJUSTMENT = -3;
+
 interface ActivityConfig {
   intensity: 'high' | 'medium' | 'low';
   tempAdjustment: number; // How much warmer you feel due to activity
@@ -18,10 +27,12 @@ const activityConfigs: Record<Activity, ActivityConfig> = {
 function getEffectiveTemp(weather: WeatherData, activity: Activity): number {
   const config = activityConfigs[activity];
   // Wind chill effect - more pronounced at higher wind speeds
-  const windChill = weather.windSpeed > 10 ? (weather.windSpeed - 10) * 0.4 : 0;
+  const windChill = weather.windSpeed > WIND_CHILL_THRESHOLD_KMH 
+    ? (weather.windSpeed - WIND_CHILL_THRESHOLD_KMH) * WIND_CHILL_FACTOR 
+    : 0;
   // Humidity makes heat feel worse and cold feel colder
-  const humidityEffect = weather.humidity > 70 
-    ? (weather.temperature > 20 ? -2 : 1) // Hot + humid feels hotter, cold + humid feels colder
+  const humidityEffect = weather.humidity > HIGH_HUMIDITY_THRESHOLD 
+    ? (weather.temperature > WARM_TEMP_THRESHOLD ? HUMIDITY_HEAT_ADJUSTMENT : HUMIDITY_COLD_ADJUSTMENT)
     : 0;
   return weather.feelsLike + config.tempAdjustment - windChill - humidityEffect;
 }
@@ -80,7 +91,7 @@ function getBaseLayer(effectiveTemp: number, activity: Activity, weather: Weathe
 function getMidLayer(effectiveTemp: number, activity: Activity, weather: WeatherData): ClothingItem | null {
   // High-intensity activities need fewer mid layers
   const isHighIntensity = activityConfigs[activity].intensity === 'high';
-  const tempThresholdAdjust = isHighIntensity ? -3 : 0;
+  const tempThresholdAdjust = isHighIntensity ? HIGH_INTENSITY_TEMP_ADJUSTMENT : 0;
   
   if (effectiveTemp < -10 + tempThresholdAdjust) {
     return {
