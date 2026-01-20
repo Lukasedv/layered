@@ -2,6 +2,10 @@
 
 A mobile-first Progressive Web App that suggests what to wear based on weather conditions and your chosen activity.
 
+## Live Demo
+
+🌐 **Production**: [https://gentle-bay-057fc6e1e.2.azurestaticapps.net](https://gentle-bay-057fc6e1e.2.azurestaticapps.net)
+
 ## Features
 
 - 🏃 **Activity-based recommendations** - Running, cycling, skiing, hiking, walking
