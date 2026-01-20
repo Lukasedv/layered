@@ -96,11 +96,12 @@ function getOuterLayer(effectiveTemp: number, weather: WeatherData): ClothingIte
 
 function getAccessories(effectiveTemp: number, weather: WeatherData, activity: Activity): string[] {
   const accessories: string[] = [];
+  const isDaytime = weather.icon?.includes('d') ?? true;
 
   // Head
   if (effectiveTemp < 5) {
     accessories.push('Warm beanie or ear warmers');
-  } else if (weather.icon.includes('d') && effectiveTemp > 15) {
+  } else if (isDaytime && effectiveTemp > 15) {
     accessories.push('Cap or visor for sun protection');
   }
 
@@ -114,7 +115,7 @@ function getAccessories(effectiveTemp: number, weather: WeatherData, activity: A
   // Eyes
   if (activity === 'skiing') {
     accessories.push('Ski goggles');
-  } else if (activity === 'cycling' || (weather.icon.includes('d') && effectiveTemp > 10)) {
+  } else if (activity === 'cycling' || (isDaytime && effectiveTemp > 10)) {
     accessories.push('Sunglasses');
   }
 
@@ -122,7 +123,7 @@ function getAccessories(effectiveTemp: number, weather: WeatherData, activity: A
   if (activity === 'running' && effectiveTemp < 5) {
     accessories.push('Neck gaiter');
   }
-  if ((activity === 'running' || activity === 'walking') && weather.icon.includes('d')) {
+  if ((activity === 'running' || activity === 'walking') && isDaytime) {
     accessories.push('Sunscreen');
   }
   if (weather.precipitation !== 'none') {

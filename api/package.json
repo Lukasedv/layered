@@ -2,6 +2,7 @@
   "name": "layered-api",
   "version": "1.0.0",
   "description": "Azure Functions API for Layered app",
+  "main": "dist/functions/*.js",
   "scripts": {
     "build": "tsc",
     "watch": "tsc -w",
