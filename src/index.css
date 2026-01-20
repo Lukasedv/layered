@@ -1,1 +1,6 @@
 @import "tailwindcss";
+
+/* Ensure emoji rendering across platforms */
+body {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Noto Color Emoji';
+}
