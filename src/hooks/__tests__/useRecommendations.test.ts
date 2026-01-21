@@ -54,7 +54,7 @@ describe('useRecommendations', () => {
   })
 
   it('sets loading state while fetching', async () => {
-    let resolvePromise: (value: Recommendation) => void
+    let resolvePromise!: (value: Recommendation) => void
     vi.mocked(api.fetchRecommendations).mockImplementationOnce(() => 
       new Promise(resolve => { resolvePromise = resolve })
     )
