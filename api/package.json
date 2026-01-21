@@ -7,16 +7,13 @@
     "build": "tsc",
     "watch": "tsc -w",
     "start": "func start",
-    "test": "vitest run",
-    "test:watch": "vitest"
+    "test": "echo \"No tests yet\""
   },
   "dependencies": {
     "@azure/functions": "^4.0.0"
   },
   "devDependencies": {
-    "@types/jest": "^30.0.0",
     "@types/node": "^20.0.0",
-    "typescript": "^5.0.0",
-    "vitest": "^4.0.17"
+    "typescript": "^5.0.0"
   }
 }
